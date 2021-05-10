@@ -6,20 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.movies.R;
 import com.fatihbaser.movies.ViewModel.HomeFragmentViewModel;
-import com.fatihbaser.movies.ViewModel.MovieDataViewModel;
-import com.fatihbaser.movies.adapter.RecyclerViewAdapter;
+import com.fatihbaser.movies.adapter.HomeAdapter;
 import com.fatihbaser.movies.model.MovieModel;
 import com.fatihbaser.movies.service.ApiService;
+import com.fatihbaser.movies.service.RetroIntance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -29,7 +26,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
     FloatingActionButton backPage;
@@ -67,10 +63,7 @@ public class HomeFragment extends Fragment {
         nextPage = v.findViewById(R.id.nextPage);
         recyclerView = v.findViewById(R.id.recyclerView);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+
 
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +90,7 @@ public class HomeFragment extends Fragment {
 
     public void loadMovies(int page){
 
-        ApiService apiService = retrofit.create(ApiService.class);
+        ApiService apiService = RetroIntance.getRetroClient().create(ApiService.class);
 
         Call<MovieModel> modelC = apiService.getPages("popular",API_KEY,page);
 
@@ -111,7 +104,7 @@ public class HomeFragment extends Fragment {
                     List<MovieModel.Results> list = movieModel.getResults();
                     movieResults = new ArrayList<>(list);
 
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(movieResults,getContext());
+                    HomeAdapter adapter = new HomeAdapter(movieResults,getContext());
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());

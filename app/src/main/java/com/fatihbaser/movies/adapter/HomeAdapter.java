@@ -20,21 +20,20 @@ import com.fatihbaser.movies.R;
 import com.fatihbaser.movies.activity.MovieDetailsActivity;
 import com.fatihbaser.movies.database.MovieData;
 import com.fatihbaser.movies.database.RoomDB;
-import com.fatihbaser.movies.model.FavoriteListModel;
 import com.fatihbaser.movies.model.MovieModel;
 import com.fatihbaser.movies.view.fragment.FavoriteFragment;
 
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements PopupMenu.OnMenuItemClickListener {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> implements PopupMenu.OnMenuItemClickListener {
 
     public ArrayList<MovieModel.Results> resultList;
     public Context context;
     public int pos = -1;
 
 
-    public RecyclerViewAdapter(ArrayList<MovieModel.Results> list, Context context) {
+    public HomeAdapter(ArrayList<MovieModel.Results> list, Context context) {
         this.resultList = list;
         this.context = context;
     }

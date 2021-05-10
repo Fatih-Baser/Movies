@@ -18,6 +18,7 @@ import com.fatihbaser.movies.database.RoomDB;
 import com.fatihbaser.movies.model.FavoriteListModel;
 import com.fatihbaser.movies.model.MovieDetailsModel;
 import com.fatihbaser.movies.service.ApiService;
+import com.fatihbaser.movies.service.RetroIntance;
 import com.fatihbaser.movies.view.fragment.FavoriteFragment;
 
 import retrofit2.Call;
@@ -62,15 +63,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         trailerButton = findViewById(R.id.trailerButton);
         detailsFavorite = findViewById(R.id.detailsActivityFavorite);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+
 
         Intent intent = getIntent();
         id = intent.getIntExtra("movie_id",791373);
 
-        ApiService apiService = retrofit.create(ApiService.class);
+        ApiService apiService = RetroIntance.getRetroClient().create(ApiService.class);
 
         Call<MovieDetailsModel> call = apiService.getDetails(id,API_KEY);
 
