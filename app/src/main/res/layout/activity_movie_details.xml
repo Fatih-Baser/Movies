@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background"
+    tools:context=".activity.MovieDetailsActivity">
+
+
+    <ImageView
+        android:id="@+id/movieDetailsTitleImage"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        app:srcCompat="@drawable/movie_details" />
+
+    <ImageView
+        android:id="@+id/movieDetailsPosterImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:paddingTop="20dp"
+        app:srcCompat="@drawable/loading_image" />
+
+    <TextView
+        android:id="@+id/titleDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"></Space>
+
+        <ImageView
+            android:id="@+id/detailsActivityFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            app:srcCompat="@drawable/ic_favorite"></ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/voteDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="5dp"
+            android:text="Vote : "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/languageDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="3dp"
+            android:text="Language : "
+            android:textAlignment="textEnd"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/overviewDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/trailerButton"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:background="@drawable/button_style"
+        android:text="Watch Trailer" />
+
+    <TextView
+        android:id="@+id/homepageLinkTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:textColor="@color/black"
+        android:paddingBottom="15dp"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/homepageButton"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:background="@drawable/button_style"
+        android:text="Go Homepage" />
+
+</LinearLayout>
