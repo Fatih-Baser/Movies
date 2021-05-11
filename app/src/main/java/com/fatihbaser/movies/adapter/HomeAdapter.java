@@ -31,11 +31,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     public ArrayList<MovieModel.Results> resultList;
     public Context context;
     public int pos = -1;
+    public ItemClickListener clickListener;
+
+    private  LayoutInflater layoutInflater;
 
 
-    public HomeAdapter(ArrayList<MovieModel.Results> list, Context context) {
+    public HomeAdapter(ArrayList<MovieModel.Results> list, Context context,ItemClickListener clickListener) {
         this.resultList = list;
         this.context = context;
+        this.clickListener = clickListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,6 +65,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        layoutInflater=LayoutInflater.from(parent.getContext());
 
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list, parent, false);
         return new ViewHolder(itemView);
@@ -86,6 +91,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 Glide.with(context).load(MovieDetailsActivity.BASE_PHOTO_URL + posterPath).into(holder.posterImage);
             }
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    clickListener.onMovieClick(resultList.get(position));
+
+
+
+
+                }
+            });
 
             holder.addIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,6 +165,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     @Override
     public int getItemCount() {
         return resultList.size();
+    }
+
+    public interface ItemClickListener{
+        public void onMovieClick(MovieModel.Results movie);
     }
 
 }

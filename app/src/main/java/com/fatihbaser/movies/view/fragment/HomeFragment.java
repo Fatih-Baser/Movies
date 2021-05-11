@@ -1,5 +1,6 @@
 package com.fatihbaser.movies.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.movies.R;
 import com.fatihbaser.movies.ViewModel.HomeFragmentViewModel;
+import com.fatihbaser.movies.activity.MovieDetailsActivity;
 import com.fatihbaser.movies.adapter.HomeAdapter;
 import com.fatihbaser.movies.model.MovieModel;
 import com.fatihbaser.movies.service.ApiService;
@@ -27,10 +29,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeAdapter.ItemClickListener {
     FloatingActionButton backPage;
     FloatingActionButton nextPage;
     RecyclerView recyclerView;
+    int pos =-1;
 
 
     public String BASE_URL = "https://api.themoviedb.org";
@@ -103,9 +106,9 @@ public class HomeFragment extends Fragment {
                     MovieModel movieModel = response.body();
                     List<MovieModel.Results> list = movieModel.getResults();
                     movieResults = new ArrayList<>(list);
-
-                    HomeAdapter adapter = new HomeAdapter(movieResults,getContext());
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    HomeAdapter adapter = new HomeAdapter(movieResults,getContext(), movie -> HomeFragment.this.onMovieClick(movie));
+
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter);
@@ -141,6 +144,16 @@ public class HomeFragment extends Fragment {
                 loadMovies(page);
             }
         }
+    }
+
+
+    @Override
+    public void onMovieClick(MovieModel.Results movie) {
+
+        Intent intent1 = new Intent(getContext(), MovieDetailsActivity.class);
+        intent1.putExtra("movie_id",movie.getMovieId());
+        getContext().startActivity(intent1);
+
     }
 }
 
